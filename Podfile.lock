@@ -1,0 +1,16 @@
+PODS:
+  - GraphicLibrary (0.0.1)
+
+DEPENDENCIES:
+  - GraphicLibrary (from `./`)
+
+EXTERNAL SOURCES:
+  GraphicLibrary:
+    :path: "./"
+
+SPEC CHECKSUMS:
+  GraphicLibrary: a1ffbb157193d338bd1e9f556e884f0d662ed722
+
+PODFILE CHECKSUM: 6c54cb525d5078fc4de49f5f6e163da9ecfce7ca
+
+COCOAPODS: 1.10.2
