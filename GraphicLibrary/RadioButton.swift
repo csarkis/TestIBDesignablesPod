@@ -68,7 +68,7 @@ class RadioButton: UIControl {
     /// Setup the view initially
     private func setupViews() {
         self.subviews.forEach { $0.removeFromSuperview() }
-        self.translatesAutoresizingMaskIntoConstraints = false
+//        self.translatesAutoresizingMaskIntoConstraints = false
         self.autoresizesSubviews = false
 
 
