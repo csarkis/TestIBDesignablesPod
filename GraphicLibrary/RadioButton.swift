@@ -15,127 +15,62 @@ class RadioButton: UIControl {
     private var feedbackGenerator: UIImpactFeedbackGenerator?
 
     /// Radio button radius
-    private var radioButtonSize: CGFloat = 20
+    @IBInspectable var radioButtonSize: CGFloat = 20 { didSet { setNeedsDisplay() } }
 
     /// Enables haptic feedback at touch (disabled by default)
     public var useHapticFeedback: Bool = false
 
     /// A Boolean value that determines the off/on state of the radio button. Default is on
-    @IBInspectable public var isOn: Bool = true {
-        didSet {
-            setupViews()
-        }
-    }
-
-    /// A Boolean value that determines if the radio button is enabled. If it
-    /// is disabled, it won't answer to the user anymore and switch to the "disabled"
-    /// set of colors.
-    override public var isEnabled: Bool {
-        didSet {
-            setupViews()
-            if self.isEnabled != self.isComponentEnabled {
-                self.isComponentEnabled = self.isEnabled
-            }
-        }
-    }
+    @IBInspectable public var isOn: Bool = true { didSet { setNeedsDisplay() } }
 
     /// :nodoc:
     /// Boolean value meant for the Interface Builder
-    @IBInspectable var isComponentEnabled: Bool = true {
-        didSet {
-            if self.isEnabled != self.isComponentEnabled {
-                self.isEnabled = self.isComponentEnabled
-            }
-        }
-    }
-
-    // MARK: Intialisers
-
-    /// :nodoc:
-    public override init(frame: CGRect) {
-
-        super.init(frame: frame)
-        setupViews()
-    }
-
-    /// :nodoc:
-    public required init?(coder aDecoder: NSCoder) {
-
-        super.init(coder: aDecoder)
-        setupViews()
-    }
-
-    /// Setup the view initially
-    private func setupViews() {
-        self.subviews.forEach { $0.removeFromSuperview() }
-        self.translatesAutoresizingMaskIntoConstraints = false
-        self.autoresizesSubviews = false
-
-
-        self.heightAnchor.constraint(equalToConstant: 40).isActive = true
-        self.widthAnchor.constraint(equalToConstant: 40).isActive = true
-
-        prepareForInterfaceBuilder()
-        setNeedsDisplay()
+    @IBInspectable var isComponentEnabled: Bool {
+        get { isEnabled }
+        set { isEnabled = newValue }
     }
 
     /// Main color of the radio button element
     private var color: UIColor {
-        if !self.isEnabled {
-            return UIColor.lightGray
-
-        } else if !self.isOn {
+        if !isEnabled {
+            return .lightGray
+        } else if !isOn {
             // Off checkbox: circle color
-            return UIColor.darkGray
-
-        } else if let color = self.primaryColor {
+            return .darkGray
+        } else if let color = primaryColor {
             return color
         }
 
-        return self.isEnabled
-            ? UIColor.green
-            : UIColor.darkGray
+        return isEnabled ? .green : .darkGray
     }
 
     /// Primary color.
     ///
     /// Controls the "on" color of checkboxes and the "on" color of the switch bar.
-    @IBInspectable public var primaryColor: UIColor? {
-        didSet {
-            setupViews()
-        }
-    }
-
-    // MARK: View management
+    @IBInspectable public var primaryColor: UIColor?
 
     // MARK: Custom drawings
     /// Width of the unchecked radio circle
-    private var borderWidth: CGFloat = 2
+    @IBInspectable var borderWidth: CGFloat = 2 { didSet { setNeedsDisplay() } }
 
     /// :nodoc:
     public override func draw(_ rect: CGRect) {
-        super.draw(rect)
+        color.setStroke()
+        color.setFill()
 
-        let context = UIGraphicsGetCurrentContext()!
-        context.setStrokeColor(self.color.cgColor)
-        context.setFillColor(self.color.cgColor)
-        context.setLineWidth(self.borderWidth)
-
-        drawRadio(in: rect, for: context)
+        drawRadio(in: rect)
     }
 
-    private func drawRadio(in rect: CGRect, for context: CGContext) {
+    private func drawRadio(in rect: CGRect) {
         // Radio button
         // Draw inside the box, considering the border width
-        let newRect = rect.insetBy(dx: (rect.width - radioButtonSize + borderWidth) / 2,
-                                   dy: (rect.height - radioButtonSize + borderWidth) / 2)
+        let newRect = bounds.insetBy(dx: (bounds.width - radioButtonSize + borderWidth) / 2,
+                                     dy: (bounds.height - radioButtonSize + borderWidth) / 2)
 
         // Draw the outlined circle
         let borderCircle = UIBezierPath(ovalIn: newRect)
+        borderCircle.lineWidth = borderWidth
         borderCircle.stroke()
-        context.addPath(borderCircle.cgPath)
-        context.strokePath()
-        context.fillPath()
 
         if isOn {
             // Draw the inner dot
@@ -147,16 +82,7 @@ class RadioButton: UIControl {
             let innerRect: CGRect = newRect.inset(by: insets)
             let innerCircle = UIBezierPath(ovalIn: innerRect)
             innerCircle.fill()
-            context.addPath(innerCircle.cgPath)
-            context.fillPath()
         }
-    }
-
-    /// :nodoc:
-    public override func layoutSubviews() {
-        super.layoutSubviews()
-
-        self.setNeedsDisplay()
     }
 
     /// :nodoc:
@@ -164,30 +90,23 @@ class RadioButton: UIControl {
         CGSize(width: 40, height: 40)
     }
 
-    /// :nodoc:
-    public override func prepareForInterfaceBuilder() {
-        super.prepareForInterfaceBuilder()
-        self.setNeedsDisplay()
-    }
-
     // MARK: Interactions
     /// :nodoc:
     /// Start of the touch event
     public override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesBegan(touches, with: event)
-        self.feedbackGenerator = UIImpactFeedbackGenerator.init(style: .light)
-        self.feedbackGenerator?.prepare()
+        feedbackGenerator = UIImpactFeedbackGenerator.init(style: .light)
+        feedbackGenerator?.prepare()
     }
 
     /// :nodoc:
     /// End of the touch event
     public override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        self.isOn = !isOn
-        self.sendActions(for: .valueChanged)
+        isOn.toggle()
+        sendActions(for: .valueChanged)
         if useHapticFeedback {
-            self.feedbackGenerator?.impactOccurred()
-            self.feedbackGenerator = nil
+            feedbackGenerator?.impactOccurred()
+            feedbackGenerator = nil
         }
     }
-
 }
