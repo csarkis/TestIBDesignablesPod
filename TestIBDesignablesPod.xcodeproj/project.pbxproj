@@ -16,6 +16,9 @@
 		BC2E31F326D3D01F0075BA5F /* GraphicLibrary_Vendored.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC2E31EC26D3D01F0075BA5F /* GraphicLibrary_Vendored.framework */; };
 		BC2E31F426D3D01F0075BA5F /* GraphicLibrary_Vendored.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BC2E31EC26D3D01F0075BA5F /* GraphicLibrary_Vendored.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		BC2E31FA26D3D0900075BA5F /* GraphicLibrary.podspec in Resources */ = {isa = PBXBuildFile; fileRef = BC2E31F926D3D0900075BA5F /* GraphicLibrary.podspec */; };
+		BC6D4E9B271EF869003DB399 /* MyGraphicLibrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC6D4E9A271EF869003DB399 /* MyGraphicLibrary.swift */; };
+		BC6D4E9D271EF899003DB399 /* MyGraphicLibrary+Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC6D4E9C271EF899003DB399 /* MyGraphicLibrary+Button.swift */; };
+		BC6D4E9F271EF960003DB399 /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC6D4E9E271EF960003DB399 /* CustomButton.swift */; };
 		BC8ED90826D3D4540048F7F4 /* RadioButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC8ED90726D3D4540048F7F4 /* RadioButton.swift */; };
 		BCA51E3E26D3E220002DF0C9 /* Checkbox.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCA51E3D26D3E220002DF0C9 /* Checkbox.swift */; };
 		D7A9E3FD85A244545EEA210E /* Pods_GraphicLibrary_Vendored.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ABC505CAE3EA2029EAD6B271 /* Pods_GraphicLibrary_Vendored.framework */; };
@@ -66,6 +69,9 @@
 		BC2E31EE26D3D01F0075BA5F /* GraphicLibrary.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GraphicLibrary.h; sourceTree = "<group>"; };
 		BC2E31EF26D3D01F0075BA5F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BC2E31F926D3D0900075BA5F /* GraphicLibrary.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = GraphicLibrary.podspec; sourceTree = "<group>"; };
+		BC6D4E9A271EF869003DB399 /* MyGraphicLibrary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyGraphicLibrary.swift; sourceTree = "<group>"; };
+		BC6D4E9C271EF899003DB399 /* MyGraphicLibrary+Button.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MyGraphicLibrary+Button.swift"; sourceTree = "<group>"; };
+		BC6D4E9E271EF960003DB399 /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
 		BC8ED90726D3D4540048F7F4 /* RadioButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadioButton.swift; sourceTree = "<group>"; };
 		BCA51E3D26D3E220002DF0C9 /* Checkbox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Checkbox.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -141,6 +147,9 @@
 				BC2E31EF26D3D01F0075BA5F /* Info.plist */,
 				BC8ED90726D3D4540048F7F4 /* RadioButton.swift */,
 				BCA51E3D26D3E220002DF0C9 /* Checkbox.swift */,
+				BC6D4E9A271EF869003DB399 /* MyGraphicLibrary.swift */,
+				BC6D4E9C271EF899003DB399 /* MyGraphicLibrary+Button.swift */,
+				BC6D4E9E271EF960003DB399 /* CustomButton.swift */,
 			);
 			path = GraphicLibrary;
 			sourceTree = "<group>";
@@ -348,8 +357,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BC6D4E9D271EF899003DB399 /* MyGraphicLibrary+Button.swift in Sources */,
 				BCA51E3E26D3E220002DF0C9 /* Checkbox.swift in Sources */,
 				BC8ED90826D3D4540048F7F4 /* RadioButton.swift in Sources */,
+				BC6D4E9B271EF869003DB399 /* MyGraphicLibrary.swift in Sources */,
+				BC6D4E9F271EF960003DB399 /* CustomButton.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
